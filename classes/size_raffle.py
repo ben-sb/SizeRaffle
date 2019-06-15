@@ -1,6 +1,7 @@
 import requests
 import names
 import random
+from datetime import datetime
 from threading import Thread
 
 class SizeRaffle():
@@ -19,7 +20,7 @@ class SizeRaffle():
 
 
     def log(self, msg):
-        print(str(msg))
+        print('[{}]: {}'.format(datetime.now(), str(msg)))
 
 
     def get_random_ua(self):

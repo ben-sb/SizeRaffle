@@ -13,7 +13,7 @@ Requires Python 3.6 or above
 * specific_size - shoe size **(leave as null if you want random sizes)**
 * entries - number of entries you want 
 
-**Everything should be a string (surrounded by ") other than entries and specific_size if leaving as null**
+**Everything should be a string (surrounded by ") other than entries (which is an integer) and specific_size if leaving as null**
 
 
 ## To Run

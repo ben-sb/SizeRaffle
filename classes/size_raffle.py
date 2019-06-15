@@ -17,14 +17,19 @@ class SizeRaffle():
         self.shoe_size = shoe_size
         self.proxies = proxies
 
-        self.headers = {
-            'Referer': 'https://size-client-resources.s3.amazonaws.com/email/yezzy/SizeRafflePageUK.html',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.90 Safari/537.36'
-        }
-
 
     def log(self, msg):
         print(str(msg))
+
+
+    def get_random_ua(self):
+        return random.choice([
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+            "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36",
+            "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36"
+        ])
 
 
     def get_phone(self, phone_number):
@@ -53,6 +58,12 @@ class SizeRaffle():
 
 
     def enter(self):
+
+        headers = {
+            'Referer': 'https://size-client-resources.s3.amazonaws.com/email/yezzy/SizeRafflePageUK.html',
+            'User-Agent': self.get_random_ua()
+        }
+
         parameters = {
             'nourl': 'SIZE_YZY_350_BUTTER',
             'firstName': names.get_first_name(),
@@ -69,9 +80,9 @@ class SizeRaffle():
 
         try:
             if len(self.proxies) > 0:
-                requests.post("https://reporting.size.co.uk/cgi-bin/rr/blank.gif", params=parameters, headers=self.headers, proxies=self.format_proxy(random.choice(self.proxies)))
+                requests.post("https://reporting.size.co.uk/cgi-bin/rr/blank.gif", params=parameters, headers=headers, proxies=self.format_proxy(random.choice(self.proxies)))
             else:
-                requests.post("https://reporting.size.co.uk/cgi-bin/rr/blank.gif", params=parameters, headers=self.headers)
+                requests.post("https://reporting.size.co.uk/cgi-bin/rr/blank.gif", params=parameters, headers=headers)
             self.log("Successfully entered")
         except Exception as e:
             self.log("Error entering: " + str(e))

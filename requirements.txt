@@ -1,2 +1,2 @@
 names==0.3.0
-requests==2.20.1
+requests==2.31.0
